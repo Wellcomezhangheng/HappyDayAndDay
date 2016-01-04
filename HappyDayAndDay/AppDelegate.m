@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
+#import "mainViewController.h"
+#import "discoverViewController.h"
+#import "mineViewController.h"
+@interface AppDelegate ()<UITabBarControllerDelegate>
 
 @end
 
@@ -18,6 +20,28 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    UITabBarController *tabBarVC=[[UITabBarController alloc] init];
+    
+    mainViewController *maVC= [[mainViewController alloc] init];
+    UINavigationController *maNVC = [[UINavigationController alloc] initWithRootViewController:maVC];
+    
+    discoverViewController *disVC = [[discoverViewController alloc] init];
+    UINavigationController *disNVC = [[UINavigationController alloc] initWithRootViewController:disVC];
+    
+    mineViewController *miVC = [[mineViewController alloc] init];
+    UINavigationController *miNVC= [[UINavigationController alloc] initWithRootViewController:miVC];
+    
+    tabBarVC.viewControllers = @[maNVC,disNVC,miNVC];
+    tabBarVC.delegate = self;
+    
+    self.window.rootViewController = tabBarVC;
+    
+    
+    
+    
+    
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
