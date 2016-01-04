@@ -10,6 +10,7 @@
 #import "mainViewController.h"
 #import "discoverViewController.h"
 #import "mineViewController.h"
+
 @interface AppDelegate ()<UITabBarControllerDelegate>
 
 @end
@@ -19,22 +20,49 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    UITabBarController *tabBarVC=[[UITabBarController alloc] init];
+//UITabBarController
+    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+//创建被tabBarVC管理的视图控制器
+    //主页
     
-    mainViewController *maVC= [[mainViewController alloc] init];
-    UINavigationController *maNVC = [[UINavigationController alloc] initWithRootViewController:maVC];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"mainStoryboard" bundle:nil];
+    UINavigationController *mainNVC = mainStoryboard.instantiateInitialViewController;
+//    mainNVC.tabBarItem.title = @"首页";
+    mainNVC.tabBarItem.image = [UIImage imageNamed:@"ft_home_normal_ic.png"];
+    UIImage *mainImage = [UIImage imageNamed:@"ft_home_selected_ic.png"];
+    //tabBar设置选中图片按照图片原始状态显示
+    mainNVC.tabBarItem.selectedImage = [mainImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+  mainNVC.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
-    discoverViewController *disVC = [[discoverViewController alloc] init];
-    UINavigationController *disNVC = [[UINavigationController alloc] initWithRootViewController:disVC];
+    //发现
+    UIStoryboard *discoverStoryboard = [UIStoryboard storyboardWithName:@"discoverStoryboard" bundle:nil];
+    UINavigationController *discoverNVC = discoverStoryboard.instantiateInitialViewController;
+    //discoverNVC.tabBarItem.title = @"首页";
+    discoverNVC.tabBarItem.image = [UIImage imageNamed:@"ft_found_normal_ic.png"];
+    UIImage *discoverImage = [UIImage imageNamed:@"ft_found_selected_ic.png"];
+    //tabBar设置选中图片按照图片原始状态显示
+    discoverNVC.tabBarItem.selectedImage = [discoverImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    discoverNVC.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
-    mineViewController *miVC = [[mineViewController alloc] init];
-    UINavigationController *miNVC= [[UINavigationController alloc] initWithRootViewController:miVC];
+    //我的ft_found_selected_ic.png
+    UIStoryboard *mineStoryboard = [UIStoryboard storyboardWithName:@"mineStoryboard" bundle:nil];
+    UINavigationController *mineNVC = mineStoryboard.instantiateInitialViewController;
+   // mineNVC.tabBarItem.title = @"首页";
+    mineNVC.tabBarItem.image = [UIImage imageNamed:@"ft_person_normal_ic.png"];UIImage *mineImage = [UIImage imageNamed:@"ft_person_selected_ic.png"];
+    //tabBar设置选中图片按照图片原始状态显示
+    mineNVC.tabBarItem.selectedImage = [mineImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    tabBarVC.viewControllers = @[maNVC,disNVC,miNVC];
-    tabBarVC.delegate = self;
+    //按照上左下右的方法去设置
+    mineNVC.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
+    
+    
+    //添加被管理的视图控制器
+    tabBarVC.viewControllers = @[mainNVC,discoverNVC,mineNVC];
     self.window.rootViewController = tabBarVC;
+    tabBarVC.tabBar.barTintColor = [UIColor whiteColor];
+    //选中颜色
+    tabBarVC.tabBar.tintColor=[UIColor cyanColor];
     
     
     
