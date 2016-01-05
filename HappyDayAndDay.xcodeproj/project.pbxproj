@@ -68,6 +68,8 @@
 		7A12A2011C3A5FA2001ABF5E /* red_shape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12A1C51C3A5FA2001ABF5E /* red_shape.png */; };
 		7A12A2021C3A5FA2001ABF5E /* select.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12A1C61C3A5FA2001ABF5E /* select.png */; };
 		7A12A2031C3A5FA2001ABF5E /* shopping_trolley.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12A1C71C3A5FA2001ABF5E /* shopping_trolley.png */; };
+		7A12A2071C3A7673001ABF5E /* mainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12A2051C3A7673001ABF5E /* mainTableViewCell.m */; };
+		7A12A2081C3A7673001ABF5E /* mainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A12A2061C3A7673001ABF5E /* mainTableViewCell.xib */; };
 		7AD90CFC1C3A3C3600D8BF2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD90CFB1C3A3C3600D8BF2C /* main.m */; };
 		7AD90CFF1C3A3C3600D8BF2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD90CFE1C3A3C3600D8BF2C /* AppDelegate.m */; };
 		7AD90D011C3A3C3600D8BF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AD90D001C3A3C3600D8BF2C /* Assets.xcassets */; };
@@ -257,6 +259,9 @@
 		7A12A1C51C3A5FA2001ABF5E /* red_shape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_shape.png; sourceTree = "<group>"; };
 		7A12A1C61C3A5FA2001ABF5E /* select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select.png; sourceTree = "<group>"; };
 		7A12A1C71C3A5FA2001ABF5E /* shopping_trolley.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopping_trolley.png; sourceTree = "<group>"; };
+		7A12A2041C3A7673001ABF5E /* mainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mainTableViewCell.h; path = HappyDayAndDay/classes/main/Cell/mainTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		7A12A2051C3A7673001ABF5E /* mainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = mainTableViewCell.m; path = HappyDayAndDay/classes/main/Cell/mainTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		7A12A2061C3A7673001ABF5E /* mainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainTableViewCell.xib; path = HappyDayAndDay/classes/main/Cell/mainTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		7AD90CF71C3A3C3600D8BF2C /* HappyDayAndDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyDayAndDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD90CFB1C3A3C3600D8BF2C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7AD90CFD1C3A3C3600D8BF2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -749,6 +754,9 @@
 			isa = PBXGroup;
 			children = (
 				7AD90E241C3A528D00D8BF2C /* mainStoryboard.storyboard */,
+				7A12A2041C3A7673001ABF5E /* mainTableViewCell.h */,
+				7A12A2051C3A7673001ABF5E /* mainTableViewCell.m */,
+				7A12A2061C3A7673001ABF5E /* mainTableViewCell.xib */,
 			);
 			name = Cell;
 			path = HappyDayAndDay/classes/main/Cell;
@@ -986,6 +994,7 @@
 				7AD90DEC1C3A501F00D8BF2C /* 60-signpost.png in Resources */,
 				7A12A1CA1C3A5FA2001ABF5E /* btn_exchange.png in Resources */,
 				7A12A1EC1C3A5FA2001ABF5E /* ic_com_sina_weibo_sdk_login_with_account_text_normal.png in Resources */,
+				7A12A2081C3A7673001ABF5E /* mainTableViewCell.xib in Resources */,
 				7AD90DC91C3A501F00D8BF2C /* 25-weather.png in Resources */,
 				7AD90DCA1C3A501F00D8BF2C /* 26-bandaid.png in Resources */,
 				7AD90DB31C3A501F00D8BF2C /* 103-map.png in Resources */,
@@ -1081,6 +1090,7 @@
 				7AD90D331C3A4D8400D8BF2C /* mineViewController.m in Sources */,
 				7AD90CFF1C3A3C3600D8BF2C /* AppDelegate.m in Sources */,
 				7AD90CFC1C3A3C3600D8BF2C /* main.m in Sources */,
+				7A12A2071C3A7673001ABF5E /* mainTableViewCell.m in Sources */,
 				7AD90D321C3A4D8400D8BF2C /* mainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

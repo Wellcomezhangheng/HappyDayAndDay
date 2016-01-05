@@ -1,5 +1,5 @@
 //
-//  mainViewController.h
+//  mainTableViewCell.h
 //  HappyDayAndDay
 //
 //  Created by scjy on 16/1/4.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface mainViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface mainTableViewCell : UITableViewCell
 
 @end
