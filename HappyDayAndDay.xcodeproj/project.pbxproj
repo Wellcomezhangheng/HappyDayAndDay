@@ -79,6 +79,9 @@
 		7A194AAF1C3CC05F004725A3 /* GoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A194AAE1C3CC05F004725A3 /* GoodViewController.m */; };
 		7A194AB21C3CC083004725A3 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A194AB11C3CC083004725A3 /* HotViewController.m */; };
 		7A194AB81C3CC921004725A3 /* sousuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A194AB71C3CC921004725A3 /* sousuoViewController.m */; };
+		7AAB208D1C3D1A8C00741AFA /* Activity.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB208C1C3D1A8C00741AFA /* Activity.plist */; };
+		7AAB208F1C3D1E2F00741AFA /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB208E1C3D1E2F00741AFA /* back@2x.png */; };
+		7AAB20931C3D206D00741AFA /* UIViewController+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB20921C3D206D00741AFA /* UIViewController+common.m */; };
 		7AD90CFC1C3A3C3600D8BF2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD90CFB1C3A3C3600D8BF2C /* main.m */; };
 		7AD90CFF1C3A3C3600D8BF2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD90CFE1C3A3C3600D8BF2C /* AppDelegate.m */; };
 		7AD90D011C3A3C3600D8BF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AD90D001C3A3C3600D8BF2C /* Assets.xcassets */; };
@@ -290,6 +293,10 @@
 		7A194AB71C3CC921004725A3 /* sousuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sousuoViewController.m; sourceTree = "<group>"; };
 		7A19734A1C3CAE0100398756 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		7A19734D1C3CB3CE00398756 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		7AAB208C1C3D1A8C00741AFA /* Activity.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Activity.plist; sourceTree = "<group>"; };
+		7AAB208E1C3D1E2F00741AFA /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		7AAB20911C3D206D00741AFA /* UIViewController+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+common.h"; sourceTree = "<group>"; };
+		7AAB20921C3D206D00741AFA /* UIViewController+common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+common.m"; sourceTree = "<group>"; };
 		7AD90CF71C3A3C3600D8BF2C /* HappyDayAndDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyDayAndDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD90CFB1C3A3C3600D8BF2C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7AD90CFD1C3A3C3600D8BF2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -446,6 +453,7 @@
 		7A12A18B1C3A5FA2001ABF5E /* drawable-xhdpi */ = {
 			isa = PBXGroup;
 			children = (
+				7AAB208E1C3D1E2F00741AFA /* back@2x.png */,
 				7A12A1981C3A5FA2001ABF5E /* ft_found_normal_ic.png */,
 				7A12A19A1C3A5FA2001ABF5E /* ft_home_normal_ic.png */,
 				7A12A19B1C3A5FA2001ABF5E /* ft_home_selected_ic.png */,
@@ -514,6 +522,8 @@
 			isa = PBXGroup;
 			children = (
 				7A19734A1C3CAE0100398756 /* PrefixHeader.pch */,
+				7AAB20911C3D206D00741AFA /* UIViewController+common.h */,
+				7AAB20921C3D206D00741AFA /* UIViewController+common.m */,
 				7A19734D1C3CB3CE00398756 /* Header.h */,
 			);
 			path = "工具";
@@ -549,6 +559,7 @@
 				7AD90D021C3A3C3600D8BF2C /* LaunchScreen.storyboard */,
 				7A12A2331C3BA3F9001ABF5E /* Property List.plist */,
 				7AD90D051C3A3C3600D8BF2C /* Info.plist */,
+				7AAB208C1C3D1A8C00741AFA /* Activity.plist */,
 				7AD90CFA1C3A3C3600D8BF2C /* Supporting Files */,
 			);
 			path = HappyDayAndDay;
@@ -962,6 +973,7 @@
 				7A12A1E01C3A5FA2001ABF5E /* home_recommed_ac.png in Resources */,
 				7AD90DDE1C3A501F00D8BF2C /* 46-movie2.png in Resources */,
 				7AD90DAC1C3A501F00D8BF2C /* 07-map-marker.png in Resources */,
+				7AAB208F1C3D1E2F00741AFA /* back@2x.png in Resources */,
 				7AD90E011C3A501F00D8BF2C /* 81-dashboard.png in Resources */,
 				7A12A1DA1C3A5FA2001ABF5E /* home_huodong.png in Resources */,
 				7A12A1DB1C3A5FA2001ABF5E /* home_icon_jingdin.png in Resources */,
@@ -1080,6 +1092,7 @@
 				7AD90DCD1C3A501F00D8BF2C /* 29-heart.png in Resources */,
 				7A12A1F51C3A5FA2001ABF5E /* icon_shop.png in Resources */,
 				7AD90DD41C3A501F00D8BF2C /* 36-toolbox.png in Resources */,
+				7AAB208D1C3D1A8C00741AFA /* Activity.plist in Resources */,
 				7A12A1D41C3A5FA2001ABF5E /* ft_found_normal_ic.png in Resources */,
 				7A12A1D81C3A5FA2001ABF5E /* ft_person_normal_ic.png in Resources */,
 				7AD90DC51C3A501F00D8BF2C /* 21-skull.png in Resources */,
@@ -1149,6 +1162,7 @@
 				7A194AB81C3CC921004725A3 /* sousuoViewController.m in Sources */,
 				7A194AA61C3CBE8C004725A3 /* ActivityDetailViewController.m in Sources */,
 				7A194AA91C3CBF40004725A3 /* ThemeViewController.m in Sources */,
+				7AAB20931C3D206D00741AFA /* UIViewController+common.m in Sources */,
 				7AD90CFF1C3A3C3600D8BF2C /* AppDelegate.m in Sources */,
 				7A194AB21C3CC083004725A3 /* HotViewController.m in Sources */,
 				7A194AAC1C3CBFF1004725A3 /* classifyViewController.m in Sources */,

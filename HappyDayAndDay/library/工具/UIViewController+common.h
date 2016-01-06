@@ -1,5 +1,5 @@
 //
-//  ActivityDetailViewController.h
+//  UIViewController+common.h
 //  HappyDayAndDay
 //
 //  Created by scjy on 16/1/6.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ActivityDetailViewController : UIViewController
-@property (nonatomic, copy) NSString *activityId;
+@interface UIViewController (common)
+
+- (void)showBarkButton;
 
 @end

@@ -35,7 +35,11 @@
 @property (nonatomic, strong) NSMutableArray *adArray;
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) NSTimer *timer;
-
+@property (nonatomic, strong) UIView *allView;//头部
+@property (nonatomic, strong) UIImageView *ima;
+@property (nonatomic, strong) UIButton *button1;
+@property (nonatomic, strong) UIButton *selectBtn;
+@property (nonatomic, strong) UIButton *hotBtn;
 @end
 
 @implementation mainViewController
@@ -74,6 +78,9 @@
     self.pageControl.currentPage = page;
     
 }
+//- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
+//    return NO;
+//}
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self removeTimer];
     
@@ -82,27 +89,39 @@
     [self addTimer];
 }
 - (void)addTimer{
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
+//    if (self.timer !=nil ) {
+//        
+//    }
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
     
 }
 
 - (void)removeTimer{
     [self.timer invalidate];
+//    self.timer = nil;//停止定时器后置为nil，再次启动
 }
 
 - (void)nextImage{
     int page = (int)self.pageControl.currentPage;
     if (page >= self.adArray.count-1) {
+        
         page = 0;
+        
+        self.scroll.contentOffset = CGPointMake(0, 0);
     }
     else{
         page++;
+        CGFloat x = page *self.scroll.frame.size.width;
+        [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
+
+        
+        
+        
     }
-    CGFloat x = page *self.scroll.frame.size.width;
-   // [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
-    
-    self.scroll.contentOffset = CGPointMake(x, 0);
+//    CGFloat x = page *self.scroll.frame.size.width;
+//   // [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
+//    
+//    self.scroll.contentOffset = CGPointMake(x, 0);
     
 }
 
@@ -122,7 +141,7 @@
     self.navigationItem.rightBarButtonItem = rightbarButtn;
     
 }
-#pragma mark  网络请求
+#pragma mark  网络请
 - (void)work{
     NSString *urling = kMainDataList;
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
@@ -145,8 +164,9 @@
             [self.listArray addObject:self.activityArray];
             NSArray *adDataArray = dic[@"adData"];//广告
             for (NSDictionary *dict in adDataArray) {
+                NSDictionary *dic = @{@"url":dict[@"url"],@"type":dict[@"type"],@"id":dict[@"id"]};
 
-                [self.adArray addObject:dict[@"url"]];
+                [self.adArray addObject:dic];
                
             }
             [self configTableViewHeaderView];
@@ -171,63 +191,88 @@
 }
 #pragma mark 自定义头部
 - (void)configTableViewHeaderView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 343)];
-    view.backgroundColor=[UIColor whiteColor];
+    
+    self.allView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 343)];
+    self.allView.backgroundColor=[UIColor whiteColor];
 //设置tableView的自定义头部
-    self.tableView.tableHeaderView = view;
-    self.scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 186)];
-    self.scroll.contentSize = CGSizeMake(kWidth*self.adArray.count, 186);
-    self.scroll.pagingEnabled = YES;
-    self.scroll.bounces = NO;
-    //不显示水平方向的滚动条
-    self.scroll.showsHorizontalScrollIndicator = NO;
-    self.scroll.alwaysBounceHorizontal = NO;
-    self.scroll.delegate = self;
-    #pragma mark  图片轮播
+    self.tableView.tableHeaderView = self.allView;
+    self.ima = [UIImageView new];
+    
     for (int i = 0; i<self.adArray.count; i++) {
       
     
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth*i, 0, kWidth, 186)];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.adArray[i]]placeholderImage:nil];
+        self.ima = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth*i, 0, kWidth, 186)];
+        [self.ima sd_setImageWithURL:[NSURL URLWithString:self.adArray[i][@"url"]]placeholderImage:nil];
+//用户交互
+        self.ima.userInteractionEnabled = YES;
       
-        [self.scroll addSubview:imageView];
+        [self.scroll addSubview:self.ima];
+        [self.allView addSubview:self.pageControl];
+        
+        UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        touchBtn.frame = self.ima.frame;
+        touchBtn.tag = 100+i;
+        [touchBtn addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
+        [self.scroll addSubview:touchBtn];
+        
+        
     }
-    [view addSubview:self.scroll];
+    for (int i =0; i<5; i++) {
+        self.button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        _button1.frame = CGRectMake(kWidth/4*i,186 , kWidth/4, kWidth/4);
+        NSString *imastr = [NSString stringWithFormat:@"home_icon_%d",i+1];
+        [_button1 setImage:[UIImage imageNamed:imastr] forState:UIControlStateNormal];
+        [_button1 addTarget:self action:@selector(mainActivityButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.allView addSubview:_button1];
+    }
+    self.selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.selectBtn.frame = CGRectMake(0, 186+kWidth/4, kWidth/2, 343-186-kWidth/4);
+    NSString *Actstr = [NSString stringWithFormat:@"home_huodong"];
+    [self.selectBtn setImage:[UIImage imageNamed:Actstr] forState:UIControlStateNormal];
+    [self.selectBtn addTarget:self action:@selector(jingxuanActivity) forControlEvents:UIControlEventTouchUpInside];
+    [self.allView addSubview:self.selectBtn];
+
     
     
     
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 160, kWidth, 30)];
-    self.pageControl.numberOfPages = 5;
-    [self.pageControl addTarget:self action:@selector(pageSelectAction:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:self.pageControl];
     
+    
+
     
 #pragma mark  6个按钮
-    for (int i =0; i<5; i++) {
-        UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        button1.frame = CGRectMake(kWidth/4*i,186 , kWidth/4, kWidth/4);
-        NSString *imastr = [NSString stringWithFormat:@"home_icon_%d",i+1];
-        [button1 setImage:[UIImage imageNamed:imastr] forState:UIControlStateNormal];
-        [button1 addTarget:self action:@selector(mainActivityButtonAction) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button1];
-    }
     
-    UIButton *Activitybutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    Activitybutton.frame = CGRectMake(0, 186+kWidth/4, kWidth/2, 343-186-kWidth/4);
-    NSString *Actstr = [NSString stringWithFormat:@"home_huodong"];
-    [Activitybutton setImage:[UIImage imageNamed:Actstr] forState:UIControlStateNormal];
-    [Activitybutton addTarget:self action:@selector(jingxuanActivity) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:Activitybutton];
     
-    UIButton *Topicbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    Topicbutton.frame = CGRectMake(kWidth/2, 186+kWidth/4, kWidth/2, 343-186-kWidth/4);
+    
+    self.hotBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.hotBtn.frame = CGRectMake(kWidth/2, 186+kWidth/4, kWidth/2, 343-186-kWidth/4);
     NSString *Topicstr = [NSString stringWithFormat:@"home_zhuanti"];
-    [Topicbutton setImage:[UIImage imageNamed:Topicstr] forState:UIControlStateNormal];
-    [Topicbutton addTarget:self action:@selector(TopicActivity) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:Topicbutton];
+    [self.hotBtn setImage:[UIImage imageNamed:Topicstr] forState:UIControlStateNormal];
+    [self.hotBtn addTarget:self action:@selector(TopicActivity) forControlEvents:UIControlEventTouchUpInside];
+    [self.allView addSubview:self.hotBtn];
     
     
 }
+#pragma mark  点击广告方法
+- (void)touch:(UIButton *)adBtn{
+    
+    NSString *type = self.adArray[adBtn.tag - 100][@"type"];
+    if ([type integerValue] == 1) {
+        ActivityDetailViewController *activityVC = [[ActivityDetailViewController alloc] init];
+        //活动id
+        activityVC.activityId = self.adArray[adBtn.tag - 100][@"id"];
+        
+        
+        [self.navigationController pushViewController:activityVC animated:YES];
+    }
+    else{
+        HotViewController *hotVC = [[HotViewController alloc] init];
+        [self.navigationController pushViewController:hotVC animated:YES];
+    }
+    
+    
+}
+
+
 #pragma mark  精选活动按钮方法
 - (void)jingxuanActivity{
  
@@ -270,9 +315,50 @@
 - (NSMutableArray *)adArray{
     if (_adArray == nil) {
         self.adArray = [NSMutableArray new];
+#pragma mark  图片轮播
+      
     }
     return _adArray;
 }
+- (UIScrollView *)scroll{
+    if (_scroll == nil) {
+        //self.scroll = [UIScrollView new];
+        self.scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 186)];
+        self.scroll.contentSize = CGSizeMake(kWidth*self.adArray.count, 186);
+        self.scroll.pagingEnabled = YES;
+        self.scroll.bounces = NO;
+        //不显示水平方向的滚动条
+        self.scroll.showsHorizontalScrollIndicator = NO;
+        self.scroll.alwaysBounceHorizontal = NO;
+        self.scroll.delegate = self;
+ [self.allView addSubview:self.scroll];
+    }
+    return _scroll;
+}
+- (UIPageControl *)pageControl{
+    if (_pageControl == nil) {
+        self.pageControl = [UIPageControl new];
+        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 160, kWidth, 30)];
+        self.pageControl.numberOfPages = 5;
+        [self.pageControl addTarget:self action:@selector(pageSelectAction:) forControlEvents:UIControlEventTouchUpInside];
+       
+
+    }
+    return _pageControl;
+}
+- (UIButton *)button1{
+    if (_button1 == nil) {
+        self.button1 = [UIButton new];
+           }
+    return _button1;
+}
+- (UIButton *)selectBtn{
+    if (_selectBtn == nil) {
+        self.selectBtn = [UIButton new];
+    }
+    return _selectBtn;
+}
+
 
 #pragma mark  左右导航栏按钮方法
 #pragma mark  搜索
@@ -302,6 +388,7 @@
 }
 #pragma mark  自定义分区头部
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
      UIView *view1 = [[UIView alloc] init];
      UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth/2-160, 5, 320, 16)];
     if (section == 0) {
