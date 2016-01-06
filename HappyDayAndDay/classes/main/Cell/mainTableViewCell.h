@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "mainModel.h"
 @interface mainTableViewCell : UITableViewCell
-
+@property (nonatomic, strong) mainModel *model;
 @end

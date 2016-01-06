@@ -28,7 +28,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="欢乐周末" id="S4G-QD-HZo"/>
+                    <navigationItem key="navigationItem" title="欢乐周末" id="S4G-QD-HZo">
+                        <barButtonItem key="leftBarButtonItem" id="vEg-LL-a4x"/>
+                        <barButtonItem key="rightBarButtonItem" id="11j-Hn-eRd"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="xeY-9X-azQ" id="Ivw-0C-wIM"/>
@@ -47,6 +50,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="dHR-Av-l3J">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.37647058823529411" green="0.72394825528895757" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -58,4 +65,5 @@
             <point key="canvasLocation" x="240.5" y="471.5"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

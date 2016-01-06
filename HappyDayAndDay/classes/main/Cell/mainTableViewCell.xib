@@ -14,34 +14,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="202"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="介绍" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKz-MI-Lp5">
-                        <rect key="frame" x="0.0" y="140" width="375" height="30"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="￥131313131" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyz-BR-0it">
                         <rect key="frame" x="0.0" y="169" width="188" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="1" green="0.55741555626432415" blue="0.2248941521101272" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwf-Ag-beM">
-                        <rect key="frame" x="191" y="169" width="176" height="33"/>
-                        <state key="normal" title="Button"/>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nsH-KC-KcL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUG-15-Vb5">
+                        <rect key="frame" x="0.0" y="149" width="375" height="21"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwf-Ag-beM">
+                        <rect key="frame" x="307" y="171" width="68" height="30"/>
+                        <state key="normal" image="pos.png">
+                            <attributedString key="attributedTitle">
+                                <fragment content=" 5454">
+                                    <attributes>
+                                        <font key="NSFont" size="18" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="activityDistanceButton" destination="lwf-Ag-beM" id="oLU-6B-ZXI"/>
                 <outlet property="activityMoney" destination="gyz-BR-0it" id="Yk1-DR-ANk"/>
-                <outlet property="activityNameLable" destination="UKz-MI-Lp5" id="Vou-Jx-8qm"/>
+                <outlet property="lable" destination="rUG-15-Vb5" id="haq-Nh-Zpt"/>
                 <outlet property="op" destination="nsH-KC-KcL" id="xFZ-O4-QcR"/>
             </connections>
             <point key="canvasLocation" x="336.5" y="289.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="pos.png" width="24" height="30"/>
+    </resources>
 </document>
