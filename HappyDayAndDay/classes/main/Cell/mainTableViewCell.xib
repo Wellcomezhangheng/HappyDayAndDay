@@ -27,7 +27,7 @@
                         <rect key="frame" x="0.0" y="149" width="375" height="21"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwf-Ag-beM">
@@ -51,7 +51,7 @@
                 <outlet property="lable" destination="rUG-15-Vb5" id="haq-Nh-Zpt"/>
                 <outlet property="op" destination="nsH-KC-KcL" id="xFZ-O4-QcR"/>
             </connections>
-            <point key="canvasLocation" x="336.5" y="289.5"/>
+            <point key="canvasLocation" x="309.5" y="279.5"/>
         </tableViewCell>
     </objects>
     <resources>

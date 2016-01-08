@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //UITabBarController
-    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+_tabBarVC = [[UITabBarController alloc] init];
 //创建被tabBarVC管理的视图控制器
     //主页
     
@@ -58,11 +58,11 @@
     
     
     //添加被管理的视图控制器
-    tabBarVC.viewControllers = @[mainNVC,discoverNVC,mineNVC];
-    self.window.rootViewController = tabBarVC;
-    tabBarVC.tabBar.barTintColor = [UIColor whiteColor];
+    _tabBarVC.viewControllers = @[mainNVC,discoverNVC,mineNVC];
+    self.window.rootViewController = _tabBarVC;
+    _tabBarVC.tabBar.barTintColor = [UIColor whiteColor];
     //选中颜色
-    tabBarVC.tabBar.tintColor=[UIColor cyanColor];
+    _tabBarVC.tabBar.tintColor=[UIColor cyanColor];
     
     
     

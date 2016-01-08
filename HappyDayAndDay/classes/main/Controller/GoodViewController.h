@@ -10,4 +10,7 @@
 
 @interface GoodViewController : UIViewController
 
+
+
+
 @end

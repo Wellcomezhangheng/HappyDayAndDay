@@ -19,9 +19,12 @@
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "mainModel.h"
 #import <UIImageView+WebCache.h>
+#import "ActivityDateilView.h"
 
 @interface mainViewController ()
-
+{
+    BOOL _isTimeUp;
+}
 @property (nonatomic, retain)UIPageControl *pageControl;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -40,6 +43,11 @@
 @property (nonatomic, strong) UIButton *button1;
 @property (nonatomic, strong) UIButton *selectBtn;
 @property (nonatomic, strong) UIButton *hotBtn;
+@property (nonatomic, strong) ActivityDateilView *activityDateView;
+@property (nonatomic, strong) NSMutableDictionary *activityDic;
+@property (nonatomic, strong) NSMutableArray *activityArr;
+
+
 @end
 
 @implementation mainViewController
@@ -51,7 +59,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
- 
+    self.tabBarController.tabBar.hidden = NO;
+
     //注册一下cell
     [self.tableView registerNib:[UINib nibWithNibName:@"mainTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
    //导航栏左右按钮
@@ -62,6 +71,8 @@
     [self configTableViewHeaderView];
    //定时器
     [self addTimer];
+    self.tabBarController.tabBar.hidden = NO;
+
 }
 
 #pragma mark  page(页面实现方法)
@@ -70,16 +81,12 @@
     CGFloat pageWidth = self.scroll.frame.size.width;
     self.scroll.contentOffset = CGPointMake(pageNum*pageWidth, 0);
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    CGFloat scrollViewWidth = scrollView.frame.size.width;
-    CGFloat x = scrollView.contentOffset.x;
-    int page = (x + scrollViewWidth/2)/scrollViewWidth;
-    self.pageControl.currentPage = page;
-    
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//  
+//    
+//}
 //- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
-//    return NO;
+//    return YES;
 //}
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self removeTimer];
@@ -88,42 +95,69 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     [self addTimer];
 }
+//图片停止时，调用该函数使得滚动视图复用
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+//    CGFloat scrollViewWidth = self.scroll.frame.size.width;
+//    CGFloat x = self.scroll.contentOffset.x;
+//    int page = (x + scrollViewWidth/2)/scrollViewWidth;
+//    self.pageControl.currentPage = page;
+    //获取scroll页面宽度；
+    CGFloat pageWith = self.scroll.frame.size.width;
+    //或许scrollview的偏移量；
+    CGPoint offSet = self.scroll.contentOffset;
+    //通过偏移量和页面宽度计算当前页数；
+    NSInteger pageNumber = offSet.x/pageWith;
+    self.pageControl.currentPage = pageNumber;
+
+
+}
+
+
 - (void)addTimer{
-//    if (self.timer !=nil ) {
-//        
-//    }
+    if (self.timer !=nil ) {
+        return;
+    }
     self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
     
 }
 
 - (void)removeTimer{
     [self.timer invalidate];
-//    self.timer = nil;//停止定时器后置为nil，再次启动
+    self.timer = nil;//停止定时器后置为nil，再次启动
 }
 
 - (void)nextImage{
-    int page = (int)self.pageControl.currentPage;
-    if (page >= self.adArray.count-1) {
-        
-        page = 0;
-        
-        self.scroll.contentOffset = CGPointMake(0, 0);
-    }
-    else{
-        page++;
-        CGFloat x = page *self.scroll.frame.size.width;
-        [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
+//    int page = (int)self.pageControl.currentPage;
+//    if (page >= self.adArray.count-1) {
+//        
+//        page = 0;
+//        //CGFloat x = page *self.scroll.frame.size.width;
+//        //[se    lf.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
+//        self.scroll.contentOffset = CGPointMake(0, 0);
+//    }
+//    else{
+//        page++;
+//        CGFloat x = page *self.scroll.frame.size.width;
+//        [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
+//    }
 
-        
-        
-        
+    //把page当前页面加1；
+    //数组元素个数可能为0，当对0取余的时候没有意义
+    if (self.adArray.count > 0) {
+        NSInteger rollPage = (self.pageControl.currentPage + 1)%self.adArray.count;
+        self.pageControl.currentPage = rollPage;
+        //计算出scroll应该滚动的x轴坐标；
+        CGFloat  offset = rollPage *kWidth;
+        [self.scroll setContentOffset:CGPointMake(offset, 0) animated:YES];
+
     }
-//    CGFloat x = page *self.scroll.frame.size.width;
-//   // [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
-//    
-//    self.scroll.contentOffset = CGPointMake(x, 0);
     
+   
 }
+    
+
+
 
 #pragma mark  导航栏左右按钮
 - (void)Item{
@@ -156,10 +190,12 @@
         if ([status isEqualToString:@"success"]&&code ==0 ) {
             NSDictionary *dic = resultDic[@"success"];
             NSArray *acDataArray = dic[@"acData"];//活动
+            
             for (NSDictionary *dict in acDataArray) {
                 mainModel *model = [[mainModel alloc] initWithDictionary:dict];
                 [self.activityArray addObject:model];
-                
+                self.activityDateView.dataDic = dict;
+              
             }
             [self.listArray addObject:self.activityArray];
             NSArray *adDataArray = dic[@"adData"];//广告
@@ -168,7 +204,9 @@
 
                 [self.adArray addObject:dic];
                
+               
             }
+            //刷新头部文件
             [self configTableViewHeaderView];
             NSArray *rcDataArray = dic[@"rcData"];//专题
             for (NSDictionary *dict in rcDataArray) {
@@ -177,7 +215,7 @@
             }
             [self.listArray addObject:self.themeArray];
             [self.tableView reloadData];
-            //
+            
             NSString *cityname = dic[@"cityname"];
             //以请求回来的城市作为导航栏按钮标题
             self.navigationItem.leftBarButtonItem.title = cityname;
@@ -257,16 +295,23 @@
     
     NSString *type = self.adArray[adBtn.tag - 100][@"type"];
     if ([type integerValue] == 1) {
-        ActivityDetailViewController *activityVC = [[ActivityDetailViewController alloc] init];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"mainStoryboard" bundle:nil];
+        
+        
+        ActivityDetailViewController *activityVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ActivityDetailVC"];
+        
         //活动id
         activityVC.activityId = self.adArray[adBtn.tag - 100][@"id"];
         
-        
+//        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//        delegate.tabBarVC
         [self.navigationController pushViewController:activityVC animated:YES];
     }
     else{
-        HotViewController *hotVC = [[HotViewController alloc] init];
-        [self.navigationController pushViewController:hotVC animated:YES];
+        ThemeViewController *themeVC = [[ThemeViewController alloc] init];
+        themeVC.themeId = self.adArray[adBtn.tag-100][@"id"];
+        
+        [self.navigationController pushViewController:themeVC animated:YES];
     }
     
     
@@ -277,6 +322,7 @@
 - (void)jingxuanActivity{
  
     GoodViewController *goodVC = [[GoodViewController alloc] init];
+   
     [self.navigationController pushViewController:goodVC animated:YES];
     
 }
@@ -294,6 +340,22 @@
 }
 
 #pragma mark 懒加载
+
+- (NSTimer *)timer{
+    if (_timer == nil) {
+        self.timer = [NSTimer new];
+    }
+    return _timer;
+}
+
+- (NSMutableArray *)activityArr{
+    if (_activityArr == nil) {
+        self.activityArr = [NSMutableArray new];
+    }
+    return _activityArr;
+}
+
+
 - (NSMutableArray *)listArray{
     if (_listArray == nil) {
         self.listArray = [NSMutableArray new];
@@ -331,6 +393,9 @@
         self.scroll.showsHorizontalScrollIndicator = NO;
         self.scroll.alwaysBounceHorizontal = NO;
         self.scroll.delegate = self;
+        
+        
+        
  [self.allView addSubview:self.scroll];
     }
     return _scroll;
@@ -436,13 +501,30 @@
     
     
 }
+#pragma mark 点击cell实现方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+      //活动id
+     mainModel *model = self.listArray[indexPath.section][indexPath.row];
     if (indexPath.section == 0) {
-        ActivityDetailViewController *acDe = [[ActivityDetailViewController alloc] init];
-        [self.navigationController pushViewController:acDe animated:YES];
+        
+        
+        
+        
+        
+         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"mainStoryboard" bundle:nil];
+        
+        
+        ActivityDetailViewController *activityVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ActivityDetailVC"];
+        
+       
+      
+       
+        activityVC.activityId = model.activityId;
+        [self.navigationController pushViewController:activityVC animated:YES];
     }else{
-        ThemeViewController *thVC = [[ThemeViewController alloc] init];
-        [self.navigationController pushViewController:thVC animated:YES];
+        ThemeViewController *themeVC = [[ThemeViewController alloc] init];
+        themeVC.themeId = model.activityId;
+        [self.navigationController pushViewController:themeVC animated:YES];
     }
     
     
