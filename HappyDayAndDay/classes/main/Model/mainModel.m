@@ -24,7 +24,7 @@
             self.lat = [dict [@"lat"]floatValue ];
             self.lng = [dict [@"lng"]floatValue];
             self.address = dict[@"address"];
-            self.counts = dict[@"counts"];
+            self.counts = dict[@"counts"]  ;
             self.startTime = dict[@"startTime"];
             self.endTime = dict[@"endTime"];
            
