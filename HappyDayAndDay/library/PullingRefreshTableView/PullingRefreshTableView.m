@@ -229,7 +229,7 @@
     _dateLabel.text = [NSString stringWithFormat:@"%@: %@",
                        NSLocalizedString(@"最后更新", @""),
                        dateString];
-   
+    [df release];
 }
 
 @end
@@ -247,7 +247,12 @@
 @synthesize headerOnly = _headerOnly;
 @synthesize footerOnly = _footerOnly;
 
-
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"contentSize"];
+    [_headerView release];
+    [_footerView release];
+    [super dealloc];
+}
 
 - (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {

@@ -79,9 +79,9 @@
 		7A194AAF1C3CC05F004725A3 /* GoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A194AAE1C3CC05F004725A3 /* GoodViewController.m */; };
 		7A194AB21C3CC083004725A3 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A194AB11C3CC083004725A3 /* HotViewController.m */; };
 		7A194AB81C3CC921004725A3 /* sousuoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A194AB71C3CC921004725A3 /* sousuoViewController.m */; };
-		7A8880E71C410BC50068D807 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A8880E31C410BC50068D807 /* blueArrow.png */; };
-		7A8880E81C410BC50068D807 /* blueArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A8880E41C410BC50068D807 /* blueArrowDown.png */; };
-		7A8880E91C410BC50068D807 /* PullingRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8880E61C410BC50068D807 /* PullingRefreshTableView.m */; };
+		7A6B17F41C42559E009FD597 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B17F01C42559E009FD597 /* blueArrow.png */; };
+		7A6B17F51C42559E009FD597 /* blueArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B17F11C42559E009FD597 /* blueArrowDown.png */; };
+		7A6B17F61C42559E009FD597 /* PullingRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B17F31C42559E009FD597 /* PullingRefreshTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7AAB208D1C3D1A8C00741AFA /* Activity.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB208C1C3D1A8C00741AFA /* Activity.plist */; };
 		7AAB208F1C3D1E2F00741AFA /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB208E1C3D1E2F00741AFA /* back@2x.png */; };
 		7AAB20931C3D206D00741AFA /* UIViewController+common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB20921C3D206D00741AFA /* UIViewController+common.m */; };
@@ -197,10 +197,10 @@
 		7A194AB71C3CC921004725A3 /* sousuoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sousuoViewController.m; sourceTree = "<group>"; };
 		7A19734A1C3CAE0100398756 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		7A19734D1C3CB3CE00398756 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
-		7A8880E31C410BC50068D807 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
-		7A8880E41C410BC50068D807 /* blueArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrowDown.png; sourceTree = "<group>"; };
-		7A8880E51C410BC50068D807 /* PullingRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullingRefreshTableView.h; sourceTree = "<group>"; };
-		7A8880E61C410BC50068D807 /* PullingRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullingRefreshTableView.m; sourceTree = "<group>"; };
+		7A6B17F01C42559E009FD597 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		7A6B17F11C42559E009FD597 /* blueArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrowDown.png; sourceTree = "<group>"; };
+		7A6B17F21C42559E009FD597 /* PullingRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullingRefreshTableView.h; sourceTree = "<group>"; };
+		7A6B17F31C42559E009FD597 /* PullingRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullingRefreshTableView.m; sourceTree = "<group>"; };
 		7AAB208C1C3D1A8C00741AFA /* Activity.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Activity.plist; sourceTree = "<group>"; };
 		7AAB208E1C3D1E2F00741AFA /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		7AAB20911C3D206D00741AFA /* UIViewController+common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+common.h"; sourceTree = "<group>"; };
@@ -353,13 +353,13 @@
 			path = "工具";
 			sourceTree = "<group>";
 		};
-		7A8880E21C410BC50068D807 /* PullingRefreshTableView */ = {
+		7A6B17EF1C42559E009FD597 /* PullingRefreshTableView */ = {
 			isa = PBXGroup;
 			children = (
-				7A8880E31C410BC50068D807 /* blueArrow.png */,
-				7A8880E41C410BC50068D807 /* blueArrowDown.png */,
-				7A8880E51C410BC50068D807 /* PullingRefreshTableView.h */,
-				7A8880E61C410BC50068D807 /* PullingRefreshTableView.m */,
+				7A6B17F01C42559E009FD597 /* blueArrow.png */,
+				7A6B17F11C42559E009FD597 /* blueArrowDown.png */,
+				7A6B17F21C42559E009FD597 /* PullingRefreshTableView.h */,
+				7A6B17F31C42559E009FD597 /* PullingRefreshTableView.m */,
 			);
 			path = PullingRefreshTableView;
 			sourceTree = "<group>";
@@ -524,7 +524,7 @@
 		7AD90D341C3A4E2C00D8BF2C /* library */ = {
 			isa = PBXGroup;
 			children = (
-				7A8880E21C410BC50068D807 /* PullingRefreshTableView */,
+				7A6B17EF1C42559E009FD597 /* PullingRefreshTableView */,
 				7A1973491C3CAE0100398756 /* 工具 */,
 			);
 			path = library;
@@ -670,13 +670,13 @@
 				7A12A1F01C3A5FA2001ABF5E /* icon_ele.png in Resources */,
 				7A12A1FE1C3A5FA2001ABF5E /* logo.png in Resources */,
 				7A12A2001C3A5FA2001ABF5E /* pos.png in Resources */,
-				7A8880E81C410BC50068D807 /* blueArrowDown.png in Resources */,
+				7A6B17F51C42559E009FD597 /* blueArrowDown.png in Resources */,
 				7A12A2341C3BA3F9001ABF5E /* Property List.plist in Resources */,
 				7A12A1E31C3A5FA2001ABF5E /* ic_com_sina_weibo_sdk_button_blue_normal.9.png in Resources */,
 				7A12A1F41C3A5FA2001ABF5E /* icon_ordered.png in Resources */,
 				7A12A1E11C3A5FA2001ABF5E /* home_zhuanti.png in Resources */,
 				7A12A1D91C3A5FA2001ABF5E /* ft_person_selected_ic.png in Resources */,
-				7A8880E71C410BC50068D807 /* blueArrow.png in Resources */,
+				7A6B17F41C42559E009FD597 /* blueArrow.png in Resources */,
 				7AD90E251C3A528D00D8BF2C /* mainStoryboard.storyboard in Resources */,
 				7A12A1FC1C3A5FA2001ABF5E /* list_selected.png in Resources */,
 				7A12A1E81C3A5FA2001ABF5E /* ic_com_sina_weibo_sdk_login_button_with_frame_logo_focused.png in Resources */,
@@ -788,7 +788,7 @@
 				7AAB20931C3D206D00741AFA /* UIViewController+common.m in Sources */,
 				7AD90CFF1C3A3C3600D8BF2C /* AppDelegate.m in Sources */,
 				7AE907321C3E5B3100A6504B /* UIView+Estonsion.m in Sources */,
-				7A8880E91C410BC50068D807 /* PullingRefreshTableView.m in Sources */,
+				7A6B17F61C42559E009FD597 /* PullingRefreshTableView.m in Sources */,
 				7A194AB21C3CC083004725A3 /* HotViewController.m in Sources */,
 				7AE9072C1C3E10E300A6504B /* ActivityDateilView.m in Sources */,
 				7A194AAC1C3CBFF1004725A3 /* classifyViewController.m in Sources */,
