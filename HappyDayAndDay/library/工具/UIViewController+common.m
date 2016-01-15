@@ -22,7 +22,7 @@
 }
 - (void)back{
     
-    [self.navigationController popToRootViewControllerAnimated:YES ];
+    [self.navigationController popViewControllerAnimated:YES ];
     
 }
 @end

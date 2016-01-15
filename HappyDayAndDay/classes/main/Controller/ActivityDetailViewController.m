@@ -9,7 +9,7 @@
 #import "ActivityDetailViewController.h"
 #import "AFHTTPSessionManager.h"
 
-#import "MBProgressHUD.h"
+//#import "MBProgressHUD.h"
 #import "ActivityDateilView.h"
 #import "AppDelegate.h"
 @interface ActivityDetailViewController ()
@@ -33,6 +33,8 @@
     
    self.title = @"活动详情";
     self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+   
+    
 //    self.btn.frame = CGRectMake(0, 600, kWidth, 75);
 //    [self.btn setTitle:@"123" forState:UIControlStateNormal];
 //    self.btn.backgroundColor = [UIColor redColor];
@@ -76,15 +78,15 @@
     
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     
     [sessionManager GET:[NSString stringWithFormat:@"%@&id=%@",kActivityDetail,self.activityId] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
 
         //NSLog(@"%@",downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
         //NSLog(@"%@",responseObject);
       
         NSDictionary *dic = responseObject;
@@ -102,7 +104,7 @@
         
         
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
 
        // NSLog(@"================%@",error);
     }];

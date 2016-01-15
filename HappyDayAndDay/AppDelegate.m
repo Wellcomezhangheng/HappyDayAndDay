@@ -10,16 +10,22 @@
 #import "mainViewController.h"
 #import "discoverViewController.h"
 #import "mineViewController.h"
-
-@interface AppDelegate ()<UITabBarControllerDelegate>
-
+#import "HWtools.h"
+#import "WeiboSDK.h"
+@interface AppDelegate ()<UITabBarControllerDelegate,WeiboSDKDelegate,WBHttpRequestDelegate>
 @end
 
 @implementation AppDelegate
 
+@synthesize wbtoken;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:kAppKey];
+    
+    
 //UITabBarController
 _tabBarVC = [[UITabBarController alloc] init];
 //创建被tabBarVC管理的视图控制器
@@ -73,6 +79,26 @@ _tabBarVC = [[UITabBarController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+- (void)didReceiveWeiboRequest:(WBBaseRequest *)request
+{
+    
+    AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [WeiboSDK logOutWithToken:myDelegate.wbtoken delegate:self withTag:@"user1"];
+}
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response{
+    AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    [WeiboSDK logOutWithToken:myDelegate.wbtoken delegate:self withTag:@"user1"];
+
+}
+
+#pragma mark              share weibo
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [WeiboSDK handleOpenURL:url delegate:self];
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WeiboSDK handleOpenURL:url delegate:self];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

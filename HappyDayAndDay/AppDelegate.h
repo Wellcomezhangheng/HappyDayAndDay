@@ -11,6 +11,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSString *wbtoken;
 
 @property (nonatomic, strong) UITabBarController *tabBarVC;
 @end

@@ -11,6 +11,7 @@
 #import "goodTableViewCell.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "HWtools.h"
+#import "ActivityDetailViewController.h"
 //#import <MBProgressHUD.h>
 
 @interface GoodViewController ()<PullingRefreshTableViewDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -39,9 +40,9 @@
     
 }
 #pragma mark     UITableViewDataSource
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(PullingRefreshTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    goodTableViewCell *goodCell = [self.tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    goodTableViewCell *goodCell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
    
     goodCell.model=_acArray[indexPath.row];
     
@@ -55,6 +56,19 @@
 #pragma mark     UITableViewDelegate
 //点击
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    goodActivityModel *model = self.acArray[indexPath.row];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"mainStoryboard" bundle:nil];
+    ActivityDetailViewController *activityVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"ActivityDetailVC"];
+    
+    
+    
+    
+    activityVC.activityId = model.activityId;
+    [self.navigationController pushViewController:activityVC animated:YES];
+
+    
+    
+    
     
 }
 #pragma mark       PullingRefreshDelegate
@@ -86,7 +100,7 @@
 //tableView上拉刷新时调用
 -(void)pullingTableViewDidStartLoading:(PullingRefreshTableView *)tableView{
     _pageCount = _pageCount + 1;
-    
+    self.refreshing = NO;
     [self performSelector:@selector(loadData) withObject:nil afterDelay:1.0];
     
     
@@ -111,15 +125,29 @@
         if ([status isEqualToString:@"success"] && code == 0) {
             NSDictionary *successDic = dict[@"success"];
             NSArray *acDataArray = successDic[@"acData"];
+            //下拉刷新的时候需要移除数组中的元素
+            if (self.refreshing) {
+                //下拉
+                if (self.acArray.count>0) {
+                    [self.acArray removeAllObjects];
+                }
+                
+            }
+            
             for (NSDictionary *dic in acDataArray) {
                 goodActivityModel *goodMod = [[goodActivityModel alloc] initWithDictionary:dic];
                 [self.acArray addObject:goodMod];
+              
+                
+                
             }
+            [self.tableView reloadData];
         }
         //完成加载
         [self.tableView tableViewDidFinishedLoading];
         self.tableView.reachedTheEnd = NO;
-        [self.tableView reloadData];
+        //刷新tableView
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

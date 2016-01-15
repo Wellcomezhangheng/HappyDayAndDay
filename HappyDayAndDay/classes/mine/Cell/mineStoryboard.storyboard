@@ -8,13 +8,13 @@
         <!--我的-->
         <scene sceneID="7k3-TV-x60">
             <objects>
-                <viewController id="Mfb-e6-dFW" sceneMemberID="viewController">
+                <viewController id="Mfb-e6-dFW" customClass="mineViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Pn-IK-9ba"/>
                         <viewControllerLayoutGuide type="bottom" id="5f1-0x-UPe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MWe-kN-h2a">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.85069683900000004" blue="0.25911481450000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -31,9 +31,11 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7cH-0i-HlI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NK0-kW-ExW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="NK0-kW-ExW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.37647058823529411" green="0.72549019607843135" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.37647058823529411" green="0.72549019607843135" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

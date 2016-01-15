@@ -21,9 +21,14 @@
 #import <UIImageView+WebCache.h>
 #import "ActivityDateilView.h"
 
+
+
+
+
 @interface mainViewController ()
 {
     BOOL _isTimeUp;
+     NSTimer * _moveTime;
 }
 @property (nonatomic, retain)UIPageControl *pageControl;
 
@@ -48,6 +53,8 @@
 @property (nonatomic, strong) NSMutableArray *activityArr;
 
 
+
+
 @end
 
 @implementation mainViewController
@@ -59,7 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tabBarController.tabBar.hidden = NO;
+    
 
     //注册一下cell
     [self.tableView registerNib:[UINib nibWithNibName:@"mainTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
@@ -68,26 +75,33 @@
     //网络请求
        [self work];
     //tableView的自定义头部标题
-    [self configTableViewHeaderView];
+    //[self configTableViewHeaderView];
    //定时器
     [self addTimer];
-    self.tabBarController.tabBar.hidden = NO;
-
+  
+   
 }
 
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self viewDidAppear:YES];
+    self.tabBarController.tabBar.hidden = NO;
+    
+}
 #pragma mark  page(页面实现方法)
 - (void)pageSelectAction:(UIPageControl *)pageControl{
     NSInteger pageNum = pageControl.currentPage;
     CGFloat pageWidth = self.scroll.frame.size.width;
     self.scroll.contentOffset = CGPointMake(pageNum*pageWidth, 0);
 }
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//  
-//    
-//}
-//- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
-//    return YES;
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+  
+    
+}
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
+    return YES;
+}
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self removeTimer];
     
@@ -105,9 +119,9 @@
     //获取scroll页面宽度；
     CGFloat pageWith = self.scroll.frame.size.width;
     //或许scrollview的偏移量；
-    CGPoint offSet = self.scroll.contentOffset;
+    CGFloat offSet = self.scroll.contentOffset.x;
     //通过偏移量和页面宽度计算当前页数；
-    NSInteger pageNumber = offSet.x/pageWith;
+    NSInteger pageNumber = offSet/pageWith;
     self.pageControl.currentPage = pageNumber;
 
 
@@ -128,34 +142,19 @@
 }
 
 - (void)nextImage{
-//    int page = (int)self.pageControl.currentPage;
-//    if (page >= self.adArray.count-1) {
-//        
-//        page = 0;
-//        //CGFloat x = page *self.scroll.frame.size.width;
-//        //[se    lf.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
-//        self.scroll.contentOffset = CGPointMake(0, 0);
-//    }
-//    else{
-//        page++;
-//        CGFloat x = page *self.scroll.frame.size.width;
-//        [self.scroll setContentOffset:CGPointMake(x, 0) animated:YES];
-//    }
 
-    //把page当前页面加1；
-    //数组元素个数可能为0，当对0取余的时候没有意义
     if (self.adArray.count > 0) {
         NSInteger rollPage = (self.pageControl.currentPage + 1)%self.adArray.count;
         self.pageControl.currentPage = rollPage;
         //计算出scroll应该滚动的x轴坐标；
-        CGFloat  offset = rollPage *kWidth;
+        CGFloat  offset = (rollPage) *kWidth;
         [self.scroll setContentOffset:CGPointMake(offset, 0) animated:YES];
 
     }
     
    
 }
-    
+
 
 
 
@@ -198,16 +197,23 @@
               
             }
             [self.listArray addObject:self.activityArray];
-            NSArray *adDataArray = dic[@"adData"];//广告
+            NSArray *adDataArray = dic[@"adData"];
+            
+            //广告
+          
             for (NSDictionary *dict in adDataArray) {
                 NSDictionary *dic = @{@"url":dict[@"url"],@"type":dict[@"type"],@"id":dict[@"id"]};
 
                 [self.adArray addObject:dic];
+                
                
+                
                
             }
+            
+
             //刷新头部文件
-            [self configTableViewHeaderView];
+           [self configTableViewHeaderView];
             NSArray *rcDataArray = dic[@"rcData"];//专题
             for (NSDictionary *dict in rcDataArray) {
                 mainModel *model = [[mainModel alloc] initWithDictionary:dict];
@@ -220,47 +226,51 @@
             //以请求回来的城市作为导航栏按钮标题
             self.navigationItem.leftBarButtonItem.title = cityname;
         }
-       else{
-            
-        }
-} failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
          NSLog(@"%@",error);
     }];
+   
 }
 #pragma mark 自定义头部
 - (void)configTableViewHeaderView{
-    
+
     self.allView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 343)];
     self.allView.backgroundColor=[UIColor whiteColor];
 //设置tableView的自定义头部
     self.tableView.tableHeaderView = self.allView;
     self.ima = [UIImageView new];
-    
-    for (int i = 0; i<self.adArray.count; i++) {
+
+        for (int i = 0; i<5; i++) {
       
-    
+            
         self.ima = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth*i, 0, kWidth, 186)];
         [self.ima sd_setImageWithURL:[NSURL URLWithString:self.adArray[i][@"url"]]placeholderImage:nil];
-//用户交互
-        self.ima.userInteractionEnabled = YES;
-      
+           
+
+        //用户交互
+            self.ima.userInteractionEnabled = YES;
         [self.scroll addSubview:self.ima];
         [self.allView addSubview:self.pageControl];
-        
         UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         touchBtn.frame = self.ima.frame;
         touchBtn.tag = 100+i;
         [touchBtn addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
         [self.scroll addSubview:touchBtn];
-        
-        
-    }
+            
+            
+           
+
+}
+    
+//
+
     for (int i =0; i<5; i++) {
         self.button1 = [UIButton buttonWithType:UIButtonTypeCustom];
         _button1.frame = CGRectMake(kWidth/4*i,186 , kWidth/4, kWidth/4);
         NSString *imastr = [NSString stringWithFormat:@"home_icon_%d",i+1];
+        _button1.tag = i;
         [_button1 setImage:[UIImage imageNamed:imastr] forState:UIControlStateNormal];
-        [_button1 addTarget:self action:@selector(mainActivityButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        [_button1 addTarget:self action:@selector(mainActivityButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.allView addSubview:_button1];
     }
     self.selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -332,10 +342,12 @@
     [self.navigationController pushViewController:hotVC animated:YES];
 }
 #pragma mark 4个按钮方法
-- (void)mainActivityButtonAction{
+- (void)mainActivityButtonAction:(UIButton *)btn{
     
     classifyViewController *classVC = [[classifyViewController alloc] init];
-    [self.navigationController pushViewController:classVC animated:YES];
+    classVC.classifyListType = btn.tag-1;
+    NSLog(@"%ld",btn.tag);
+   [self.navigationController pushViewController:classVC animated:YES];
     
 }
 
@@ -386,17 +398,25 @@
     if (_scroll == nil) {
         //self.scroll = [UIScrollView new];
         self.scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 186)];
-        self.scroll.contentSize = CGSizeMake(kWidth*self.adArray.count, 186);
+//        self.scroll.contentSize = CGSizeMake(kWidth*3, 186);
+        [self.scroll setContentSize:CGSizeMake(kWidth*5, 186)];
         self.scroll.pagingEnabled = YES;
         self.scroll.bounces = NO;
         //不显示水平方向的滚动条
         self.scroll.showsHorizontalScrollIndicator = NO;
         self.scroll.alwaysBounceHorizontal = NO;
         self.scroll.delegate = self;
+        self.scroll.contentOffset = CGPointMake(kWidth, 0);
+        
         
         
         
  [self.allView addSubview:self.scroll];
+        
+     
+
+        
+        
     }
     return _scroll;
 }

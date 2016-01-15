@@ -44,7 +44,7 @@
 -(void)setDataDic:(NSDictionary *)dataDic{
     NSString *headStr = dataDic[@"image"];
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:headStr]placeholderImage:nil];
-    NSLog(@"%@",dataDic[@"image"]);
+//    NSLog(@"%@",dataDic[@"image"]);
        [_mainScrollView addSubview:_headImageView];
      [self drawContentWithArray:dataDic[@"content"]];
     
@@ -118,8 +118,11 @@
         }
         
     }
-    self.mainScrollView.contentSize = CGSizeMake(kWidth, _lastLabelBottom+30);
-    
+    if (_lastLabelBottom>_previousImageBottom) {
+        self.mainScrollView.contentSize = CGSizeMake(kWidth, _lastLabelBottom+30);
+    }else{
+    self.mainScrollView.contentSize = CGSizeMake(kWidth, _previousImageBottom+30);
+    }
 }
 
 

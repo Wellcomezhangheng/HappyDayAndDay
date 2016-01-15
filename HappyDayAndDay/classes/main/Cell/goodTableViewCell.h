@@ -2,7 +2,7 @@
 //  goodTableViewCell.h
 //  HappyDayAndDay
 //
-//  Created by scjy on 16/1/8.
+//  Created by scjy on 16/1/11.
 //  Copyright © 2016年 张衡. All rights reserved.
 //
 

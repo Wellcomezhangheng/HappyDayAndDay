@@ -8,7 +8,7 @@
 
 #import "ThemeViewController.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
-#import <MBProgressHUD.h>
+
 #import "activityThemeView.h"
 @interface ThemeViewController ()
 @property (nonatomic, strong)activityThemeView *themeView;
@@ -35,15 +35,15 @@
     
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     
     [sessionManager GET:[NSString stringWithFormat:@"%@&id=%@",kActivityTheme,self.themeId] parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         //NSLog(@"%@",downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
          //NSLog(@"%@",responseObject);
         NSDictionary *dic = responseObject;
         NSString *status = dic[@"status"];
@@ -58,7 +58,7 @@
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         // NSLog(@"================%@",error);
     }];
